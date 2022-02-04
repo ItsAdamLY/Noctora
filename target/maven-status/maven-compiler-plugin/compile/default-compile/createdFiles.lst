@@ -1,0 +1,11 @@
+me\itsadamly\noctora\atmthings\atmOpenCloseAcc.class
+me\itsadamly\noctora\events\playerinfoEvent.class
+me\itsadamly\noctora\sqlthing\sqltask.class
+me\itsadamly\noctora\atmthings\atmCard.class
+me\itsadamly\noctora\commands\playerinfo.class
+me\itsadamly\noctora\commands\atm.class
+me\itsadamly\noctora\atmthings\atmcalc.class
+me\itsadamly\noctora\atmthings\atmeverything.class
+me\itsadamly\noctora\atmthings\atmSign.class
+me\itsadamly\noctora\events\menuClickEvent.class
+me\itsadamly\noctora\Main.class
