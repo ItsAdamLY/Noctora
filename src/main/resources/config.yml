@@ -1,0 +1,6 @@
+DatabaseName: 'Bank_Account'
+TableName: 'Accounts'
+DatabaseIP: 'noctora.ddns.net'
+DatabasePort: 3306
+DatabaseUsername: 'ItsAdamLY'
+DatabasePass: 'Adamdanial48'
