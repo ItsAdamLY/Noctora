@@ -92,6 +92,22 @@ public class sqltask
         }
     }
 
+    public void setMoney(UUID uuid, double money)
+    {
+        try
+        {
+            PreparedStatement stmt = Main.getConnection().prepareStatement(
+                    "UPDATE " + Main.tableName + " SET MONEY=? WHERE UUID=?");
+            stmt.setDouble(1, money); //update
+            stmt.setString(2, uuid.toString());
+            stmt.executeUpdate();
+        }
+        catch (SQLException error)
+        {
+            error.printStackTrace();
+        }
+    }
+
     public double getMoney(UUID uuid)
     {
         try
@@ -101,11 +117,9 @@ public class sqltask
             stmt.setString(1, uuid.toString());
             ResultSet result = stmt.executeQuery();
 
-            double money;
-
             if (result.next())
             {
-                return money = result.getDouble("MONEY");
+                return result.getDouble("MONEY");
             }
 
         } catch (SQLException error)
@@ -141,7 +155,7 @@ public class sqltask
             );
             ResultSet result = stmt.executeQuery();
 
-                for (int i = 0; result.next(); i++)
+                for (int i = 0; result.next(); i++) // loop for each uuid until there is no data left
                 {
                     String s = result.getString("UUID");
                     String s2 = s.replace("-", "");
@@ -160,6 +174,32 @@ public class sqltask
             error.printStackTrace();
         } return null;
     }
+
+    /* public ArrayList<String> getPlayerFromDB()
+    {
+        try
+        {
+            ArrayList<String> playerNameArray = new ArrayList<>();
+
+            PreparedStatement stmt = Main.getConnection().prepareStatement(
+                    "SELECT NAME FROM " + Main.tableName
+            );
+            ResultSet result = stmt.executeQuery();
+
+            for (int i = 0; result.next(); i++) // loop for each uuid until there is no data left
+            {
+                String p = result.getString("Name");
+                playerNameArray.add(p);
+            }
+
+            return playerNameArray;
+
+        } catch (SQLException error)
+        {
+            System.out.println("Failed to get player's UUID");
+            error.printStackTrace();
+        } return null;
+    } */
 
     public int countRows()
     {
@@ -259,7 +299,6 @@ public class sqltask
     {
         try
         {
-            String cardID;
             PreparedStatement stmt = Main.getConnection().prepareStatement(
                     "SELECT CARDID FROM " + Main.tableName + " WHERE UUID=?"
             );
@@ -269,9 +308,8 @@ public class sqltask
 
             if (result.next())
             {
-                return cardID = result.getString("CARDID");
+                return result.getString("CARDID");
             }
-
         }
         catch (SQLException error)
         {
