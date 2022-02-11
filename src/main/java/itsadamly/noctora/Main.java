@@ -38,6 +38,7 @@ public final class Main extends JavaPlugin implements Listener {
         iP = this;
         getCommand("playerinfo").setExecutor(new playerinfo());
         getCommand("atm").setExecutor(new atm());
+        getCommand("atm").setTabCompleter(new atm());
         getServer().getPluginManager().registerEvents(new playerinfoEvent(), this);
         getServer().getPluginManager().registerEvents(new menuClickEvent(), this);
         getServer().getPluginManager().registerEvents(new atmSign(), this);
@@ -48,11 +49,12 @@ public final class Main extends JavaPlugin implements Listener {
 
         connectSQL();
 
-        if (calendar.get(Calendar.DAY_OF_MONTH) == 1) {
+        if (calendar.get(Calendar.DAY_OF_MONTH) == 1) { //first day of a month
             try
             {
                 monthlyInterest();
-            } catch (Exception error)
+            }
+            catch (Exception error)
             {
                 error.printStackTrace();
             }
@@ -115,13 +117,6 @@ public final class Main extends JavaPlugin implements Listener {
         for (int i = 0; i <= (data.countRows() - 1); i++)
         {
               try {
-                    /*{
-                    String s = uuid.get(i);
-                    String s2 = s.replace("-", "");
-                    UUID uuid1 = new UUID(
-                            new BigInteger(s2.substring(0, 16), 16).longValue(),
-                            new BigInteger(s2.substring(16), 16).longValue());
-                }*/
 
                   ArrayList<UUID> uuidArray = new sqltask().getUUID();
 

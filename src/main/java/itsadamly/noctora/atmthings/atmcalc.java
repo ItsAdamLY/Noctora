@@ -19,7 +19,7 @@ public class atmcalc {
         } else {
             economy.withdrawPlayer(player, money);
             double bankMoney = data.getMoney(player.getUniqueId());
-            data.updateMoney(player.getUniqueId(), money);
+            data.updateMoney(player.getUniqueId(), money, "add");
             player.sendMessage(ChatColor.GREEN + "Transaction success! Your new bank balance is : " + ChatColor.YELLOW + "$ " + String.format("%.2f", bankMoney + money));
             player.closeInventory();
         }
@@ -32,7 +32,7 @@ public class atmcalc {
             player.sendMessage(ChatColor.RED + "There is not enough balance in your account.");
         } else {
             economy.depositPlayer(player, money);
-            data.updateMoney(player.getUniqueId(), -money);
+            data.updateMoney(player.getUniqueId(), -money, "subtract");
             player.sendMessage(ChatColor.GREEN + "Transaction success! Your new bank balance is : " + ChatColor.YELLOW + "$ " + String.format("%.2f", bankMoney - money));
             player.closeInventory();
         }

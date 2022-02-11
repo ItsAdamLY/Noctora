@@ -19,7 +19,6 @@ public class atmOpenCloseAcc {
     {
 
        try {
-
            UUID uuid = player.getUniqueId();
 
            double money = economy.getBalance(player);
@@ -32,7 +31,7 @@ public class atmOpenCloseAcc {
                } else {
                    economy.withdrawPlayer(player, initialDeposit); // withdraw FROM player, aka player do deposit
                    data.createPlayer(player, cardCode);
-                   data.updateMoney(uuid, initialDeposit);
+                   data.updateMoney(uuid, initialDeposit, "add");
                    player.getInventory().addItem(atmCard.atmCardDetails(player, cardCode));
                    player.sendMessage(ChatColor.GREEN + "Success! You have opened a bank account.");
                }
@@ -42,7 +41,6 @@ public class atmOpenCloseAcc {
         } catch (Exception e) {
            e.printStackTrace();
        }
-
     }
 
     public static void atmCloseAcc(Player player)

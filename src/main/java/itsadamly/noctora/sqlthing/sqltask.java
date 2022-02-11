@@ -76,15 +76,24 @@ public class sqltask
         }
     }
 
-    public void updateMoney(UUID uuid, double money)
+    public void updateMoney(UUID uuid, double money, String args)
     {
         try
         {
             PreparedStatement stmt = Main.getConnection().prepareStatement(
                     "UPDATE " + Main.tableName + " SET MONEY=? WHERE UUID=?");
-            stmt.setDouble(1, getMoney(uuid) + money); //update
+
+            if (args.equalsIgnoreCase("set"))
+            {
+                stmt.setDouble(1, money);
+            }
+            else
+            {
+                stmt.setDouble(1, getMoney(uuid) + money);
+            }
+
             stmt.setString(2, uuid.toString());
-            stmt.executeUpdate();
+            stmt.executeUpdate();  //update
         }
         catch (SQLException error)
         {
@@ -92,14 +101,23 @@ public class sqltask
         }
     }
 
-    public void setMoney(UUID uuid, double money)
+    public void updateMoneyAll(ArrayList<UUID> uuid, int i, double money, String args)
     {
         try
         {
             PreparedStatement stmt = Main.getConnection().prepareStatement(
                     "UPDATE " + Main.tableName + " SET MONEY=? WHERE UUID=?");
-            stmt.setDouble(1, money); //update
-            stmt.setString(2, uuid.toString());
+
+            if (args.equalsIgnoreCase("set"))
+            {
+                stmt.setDouble(1, money);
+            }
+
+            else if (args.equalsIgnoreCase("add") || args.equalsIgnoreCase("subtract")){
+                stmt.setDouble(1, getMoney(uuid.get(i)) + money);
+            } //update
+
+            stmt.setString(2, uuid.get(i).toString());
             stmt.executeUpdate();
         }
         catch (SQLException error)
@@ -175,7 +193,7 @@ public class sqltask
         } return null;
     }
 
-    /* public ArrayList<String> getPlayerFromDB()
+    public ArrayList<String> getPlayerFromDB()
     {
         try
         {
@@ -199,7 +217,7 @@ public class sqltask
             System.out.println("Failed to get player's UUID");
             error.printStackTrace();
         } return null;
-    } */
+    }
 
     public int countRows()
     {
